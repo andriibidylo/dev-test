@@ -1,7 +1,7 @@
 # Web Development Test: React/NextJS Frontend for WordPress Backend
 
 ## Objective:
-Develop a simple NextJS application that uses data from the WordPress JSON API as its backend. 
+Develop a simple React/NextJS application that uses data from the WordPress JSON API as its backend. 
 The application should have a homepage and templates for displaying individual pages and posts.
 
 ## Instructions
