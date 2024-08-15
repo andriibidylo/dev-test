@@ -1,50 +1,36 @@
-# Web Development Test: React/NextJS Frontend for WordPress Backend
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Objective:
-Develop a simple React/NextJS application that uses data from the WordPress JSON API as its backend. 
-The application should have a homepage and templates for displaying individual pages and posts.
+## Getting Started
 
-## Instructions
+First, run the development server:
 
-### 1. API Endpoints
-   - The WordPress JSON API will be accessible from `https://dev-test.yourballistic.com/wp-json`.
-   - No auth is required, as you'll only be using get endpoints that aren't protected.
-   - Be careful with CORS errors.
-   - Feel free to explore the API to understand the structure of posts, pages, and ACF fields. You are free to use any endpoints you wish as long as the data being pulled is correct.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-### 2. Layout
-  - You're free to customize the layout. The only requirements are that you have a header with the main menu and a footer on every page.
-  - The main menu should have three buttons: "Home", "Posts", and "Pages". The last one should be a dropdown that shows pages coming from the API.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### 3. Homepage:
-   - Create a homepage that displays a list of recent posts with the most recent post being 'featured'. Make the featured post stand out in whichever way you prefer. 
-   - Each post on the list entry should display the title, featured image, excerpt, and should link to the individual post page.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### 4. Post/Page Template:
-   - Develop a couple of templates for viewing individual posts and pages.
-   - The templates should display the title, content, and any ACF fields associated with the posts.
-   - Ensure the template handles and displays media (images, videos) properly if included in the post/page content.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-### 5. Fetching Data:
-   - Use `fetch` API or any suitable library like Axios to retrieve data from the WordPress JSON API.
-   - Implement proper error handling and loading states while data is being fetched.
+## Learn More
 
-### 6. Routing:
-   - You're free to use whatever routing pattern you choose. (NextJS App Router is preferred).
-   - URLs should be user-friendly and SEO-friendly.
+To learn more about Next.js, take a look at the following resources:
 
-### 7. Styling:
-   - Apply basic styling using a CSS lib like Tailwind, Chakra or MaterialUI. The layout should be responsive and mobile-friendly.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### 8. Documentation:
-   - Provide a README file with instructions on how to run the project locally.
-   - Document any assumptions or decisions made during the development process.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Submission:
-- Submit the complete source code via by creating a Pull Request to this repository.
+## Deploy on Vercel
 
-## Evaluation Criteria:
-- Functionality: The application works and meets all functional requirements.
-- Code Quality: Code is clean, well-organized, and properly commented.
-- UI/UX Design: The application is easy to navigate on any device size.
-- Error Handling: The application gracefully handles and reports errors.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
