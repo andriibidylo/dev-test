@@ -1,13 +1,5 @@
-import Skeleton from "../components/Skeleton";
+import Spinner from "../components/Spinner";
 
 export default function LoadingPosts() {
-  return (
-    <>
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-      <Skeleton />
-    </>
-  );
+  return <Spinner />;
 }
