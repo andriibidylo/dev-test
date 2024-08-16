@@ -39,7 +39,7 @@ export default function error({
       window.location.href = "/"; // Redirect to home page after third click
     }
   };
-
+  // TODO: Display appropriate error message from error prop.
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <h2 className="text-xl font-semibold mb-4">Something went wrong!</h2>
