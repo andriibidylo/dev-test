@@ -1,22 +1,16 @@
 "use client";
-
+import useSWR from "swr";
+import fetcher from "@/app/utils/fetcher";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import DropdownMenu from "../DropdownMenu";
-import useSWR from "swr";
-import axios from "axios";
-
-const fetcher = async (url: string) => {
-  const { data } = await axios.get(url);
-  return data;
-};
 
 export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { data: pages, error } = useSWR(
-    "https://dev-test.yourballistic.com/wp-json/wp/v2/pages?acf_format=standard&_fields=id,title",
+    `${process.env.NEXT_PUBLIC_API_URL}/pages?acf_format=standard&_fields=id,title`,
     fetcher
   );
   const toggleDropdown = () => {

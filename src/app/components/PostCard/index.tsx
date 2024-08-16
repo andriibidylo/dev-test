@@ -4,9 +4,11 @@ import DOMPurify from "dompurify";
 import { PostType } from "@/app/types/post";
 import Link from "next/link";
 import Image from "next/image";
-import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import classNames from "classnames";
+import fetcher from "@/app/utils/fetcher";
+import useSWR from "swr";
+import generateUrlSlug from "@/app/utils/generateUrlSlug";
 
 const sanitizeHtml = (html: string) => {
   return DOMPurify.sanitize(html, {
@@ -22,45 +24,18 @@ export default function PostCard({
   post: PostType;
   index: number;
 }) {
+  const { data: imageData, error } = useSWR(
+    post.featured_media > 0
+      ? `${process.env.NEXT_PUBLIC_API_URL}/media/${post.featured_media}`
+      : null,
+    fetcher
+  );
+
   const cleanHTMLExcerpt = useMemo(
     () => sanitizeHtml(post.excerpt.rendered),
     [post.excerpt.rendered]
   );
 
-  const [imageData, setImageData] = useState<{
-    large?: { source_url: string; width: number; height: number };
-  } | null>(null);
-
-  const getFeaturedMedia = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://dev-test.yourballistic.com/wp-json/wp/v2/media/${post.featured_media}`
-      );
-      return data;
-    } catch (error) {
-      console.error("Error fetching featured media:", error);
-      return null;
-    }
-  };
-
-  useEffect(() => {
-    if (post.featured_media > 0) {
-      getFeaturedMedia().then((data) => {
-        if (data?.media_details?.sizes) {
-          setImageData(data.media_details.sizes);
-        }
-      });
-    }
-  }, [post.featured_media]);
-  function generateUrlSlug(text: string) {
-    return text
-      .toString()
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, "-")
-      .replace(/[^\w\.\-]+/g, "")
-      .replace(/\-\-+/g, "-");
-  }
   const urlSlug = `${post.id}_${generateUrlSlug(post.title.rendered)}`;
 
   return (
@@ -73,12 +48,12 @@ export default function PostCard({
         )}
       >
         <h3 className="text-2xl font-semibold mb-2">{post.title.rendered}</h3>
-        {imageData?.large && (
+        {imageData?.media_details.sizes.large && (
           <Image
-            src={imageData.large.source_url}
+            src={imageData?.media_details.sizes.large.source_url}
             alt="Featured Media"
-            width={imageData.large.width}
-            height={imageData.large.height}
+            width={imageData?.media_details.sizes.large.width}
+            height={imageData?.media_details.sizes.large.height}
           />
         )}
         <p dangerouslySetInnerHTML={{ __html: cleanHTMLExcerpt }} />
