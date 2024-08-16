@@ -1,6 +1,6 @@
 import axios from "axios";
 import PostCard from "../components/PostCard";
-import { PostType } from "../types/post";
+import { PostType } from "../types/blogPost";
 
 export default async function Post() {
   const { data: posts } = await axios.get<PostType[]>(

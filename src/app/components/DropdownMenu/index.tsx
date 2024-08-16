@@ -1,8 +1,18 @@
-import { DropdownMenuProps } from "@/app/types/page";
+import { DropdownMenuProps } from "@/app/types/blogPage";
 import generateUrlSlug from "@/app/utils/generateUrlSlug";
 import Link from "next/link";
 
-export default function DropdownMenu({ pages }: DropdownMenuProps) {
+export default function DropdownMenu({
+  pages,
+  isLoading,
+  error,
+}: DropdownMenuProps) {
+  if (error) {
+    return <p>Failed to fetch pages</p>;
+  }
+  if (isLoading) {
+    return <p>Loading ...</p>;
+  }
   return (
     <div>
       {pages.map((page) => {

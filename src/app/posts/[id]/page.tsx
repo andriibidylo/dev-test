@@ -1,4 +1,4 @@
-import { DetailedPostProps, DetailedPostType } from "@/app/types/post";
+import { DetailedPostProps, DetailedPostType } from "@/app/types/blogPost";
 import axios from "axios";
 
 export default async function DetailedPost({ params }: DetailedPostProps) {

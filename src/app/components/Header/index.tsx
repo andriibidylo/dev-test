@@ -9,7 +9,13 @@ export default function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { data: pages, error } = useSWR(
+
+  //Adjust error retry for specific errors
+  const {
+    data: pages,
+    error,
+    isLoading,
+  } = useSWR(
     `${process.env.NEXT_PUBLIC_API_URL}/pages?acf_format=standard&_fields=id,title`,
     fetcher
   );
@@ -40,7 +46,9 @@ export default function Header() {
             <button onClick={toggleDropdown} className="hover:underline">
               Pages
             </button>
-            {isDropdownOpen && <DropdownMenu pages={pages} />}
+            {isDropdownOpen && (
+              <DropdownMenu pages={pages} isLoading={isLoading} error={error} />
+            )}
           </div>
         </div>
       </nav>

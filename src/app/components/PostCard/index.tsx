@@ -1,7 +1,6 @@
 "use client";
 
 import DOMPurify from "dompurify";
-import { PostType } from "@/app/types/post";
 import Link from "next/link";
 import Image from "next/image";
 import { useMemo } from "react";
@@ -9,6 +8,7 @@ import classNames from "classnames";
 import fetcher from "@/app/utils/fetcher";
 import useSWR from "swr";
 import generateUrlSlug from "@/app/utils/generateUrlSlug";
+import { PostType } from "@/app/types/blogPost";
 
 const sanitizeHtml = (html: string) => {
   return DOMPurify.sanitize(html, {
@@ -31,6 +31,7 @@ export default function PostCard({
     fetcher
   );
 
+  // Clean up the HTML that we receive from the API !IMPORTANT
   const cleanHTMLExcerpt = useMemo(
     () => sanitizeHtml(post.excerpt.rendered),
     [post.excerpt.rendered]
@@ -49,6 +50,7 @@ export default function PostCard({
       >
         <h3 className="text-2xl font-semibold mb-2">{post.title.rendered}</h3>
         {imageData?.media_details.sizes.large && (
+          // Make images blurry at the beginning, add appropriate alt text (maybe from the API), and adjust the dimensions
           <Image
             src={imageData?.media_details.sizes.large.source_url}
             alt="Featured Media"
